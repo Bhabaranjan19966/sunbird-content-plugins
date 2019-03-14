@@ -113,7 +113,7 @@
                         </div>
                         <div ng-show="showEditMeta && !publishMode && !isFlagReviewer" id="saveButton" ng-class="disableSaveBtn ? 'icon-box popup-item label-icon-box disabled' : 'icon-box popup-item label-icon-box'"
                             data-content="Save content" data-variation="tiny inverted" data-position="bottom center"
-                            ng-click="saveContent(); generateTelemetry({ subtype: 'save', target: 'savebutton'});">
+                            ng-click="saveContent(); generateTelemetry({ type:'click' , subtype:'save-initiated', target: 'savebutton'});">
                             <i class="icon-save"></i>
                             <span class="label-icon-box-text save-button-text">Save</span>
                         </div>

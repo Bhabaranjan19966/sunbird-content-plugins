@@ -212,6 +212,7 @@ angular.module('org.ekstep.sunbirdcommonheader:app', ["Scope.safeApply", "yaru22
 
     $scope.saveContent = function (cb) {
         $scope.disableSaveBtn = true;
+        $scope.saveStarting = new Date();
         ecEditor.dispatchEvent("org.ekstep.contenteditor:save", {
             showNotification: true,
             callback: function (err, res) {
@@ -240,9 +241,11 @@ angular.module('org.ekstep.sunbirdcommonheader:app', ["Scope.safeApply", "yaru22
                     $scope.pendingChanges = false;
                     $scope.disableQRGenerateBtn = true;
                     $scope.hideCollaboratorBtn = true;
+                    $scope.generateTelemetry({type:"click", subtype:"save-successful",target:"savebutton",duration:(new Date() - $scope.saveStarting).toString()});
                 } else {
                     $scope.disableSaveBtn = false;
                     $scope.disableQRGenerateBtn = false;
+                    $scope.generateTelemetry({type:"click", subtype:"save-failed",target:"savebutton", msg: res.statusText})
                 }
                 cb && cb(err, res);
                 $scope.$safeApply();
